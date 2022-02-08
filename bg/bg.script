@@ -1,0 +1,89 @@
+-- Background glow efect can be made with a shader
+-- If need to optimize, do it with shader
+
+local camera = require "orthographic.camera"
+
+-- Use go's instead of tilemap
+-- To create some visual efects
+-- Like glow on mouse over
+
+-- Index = shape position
+-- Positions are same with tilemap
+-- Value = sprite url
+local url_table = {}
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+
+    -- Create background go's
+    for i = -14, 14 do
+        url_table[i] = {}
+
+        for n = -8, 8 do
+            local bg = factory.create("#bg_factory", vmath.vector3(i * 48, n * 48, 1))
+            local url = msg.url(bg)
+            url.fragment = "sprite"
+
+            go.set(url, "tint.w", 0.1)
+
+            url_table[i][n] = url
+        end
+    end
+    
+    self.last_tile = vmath.vector3()
+end
+
+function on_input(self, action_id, action)
+    -- Mouse movement action_id == nil
+    if action_id == nil then
+        local mouse_pos = camera.screen_to_world(nil, vmath.vector3(action.x, action.y, 0))
+        mouse_pos.x = math.floor((mouse_pos.x + 25) / 50)
+        mouse_pos.y = math.floor((mouse_pos.y + 25) / 50)
+
+        -- Mouse out
+        go.animate(url_table[self.last_tile.x][self.last_tile.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+
+        go.animate(url_table[self.last_tile.x + 1][self.last_tile.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x - 1][self.last_tile.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x][self.last_tile.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x][self.last_tile.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+
+        go.animate(url_table[self.last_tile.x + 1][self.last_tile.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x - 1][self.last_tile.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x - 1][self.last_tile.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+        go.animate(url_table[self.last_tile.x + 1][self.last_tile.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.1, go.EASING_LINEAR, 1)
+
+        -- Mouse over
+        go.animate(url_table[mouse_pos.x][mouse_pos.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.7, go.EASING_LINEAR, 0.1)
+
+        go.animate(url_table[mouse_pos.x + 1][mouse_pos.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.3, go.EASING_LINEAR, 0.7)
+        go.animate(url_table[mouse_pos.x - 1][mouse_pos.y],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.3, go.EASING_LINEAR, 0.7)
+        go.animate(url_table[mouse_pos.x][mouse_pos.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.3, go.EASING_LINEAR, 0.7)
+        go.animate(url_table[mouse_pos.x][mouse_pos.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.3, go.EASING_LINEAR, 0.7)
+
+        go.animate(url_table[mouse_pos.x + 1][mouse_pos.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.2, go.EASING_LINEAR, 1)
+        go.animate(url_table[mouse_pos.x - 1][mouse_pos.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.2, go.EASING_LINEAR, 1)
+        go.animate(url_table[mouse_pos.x - 1][mouse_pos.y + 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.2, go.EASING_LINEAR, 1)
+        go.animate(url_table[mouse_pos.x + 1][mouse_pos.y - 1],
+            "tint.w", go.PLAYBACK_ONCE_FORWARD, 0.2, go.EASING_LINEAR, 1)
+
+        self.last_tile = mouse_pos
+    end
+end

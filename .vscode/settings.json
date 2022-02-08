@@ -103,7 +103,8 @@
         "spine",
         "sprite",
         "json",
-        "window"
+        "window",
+        "self"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global",
