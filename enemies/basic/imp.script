@@ -2,6 +2,7 @@ local enemies = require "enemies.enemies"
 
 function init(self)
 	go.property("speed", 50)
+	go.property("hp", 50)
 
     enemies.place(go.get_position())
     enemies.rotate_to(vmath.vector3(0))
@@ -18,9 +19,14 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+    if message_id == hash("trigger_response") then
+        if message.other_group == hash("bullet") then
+            self.hp = self.hp - 10
+            if self.hp <= 0 then
+                go.delete()
+            end
+        end
+    end
 end
 
 function on_input(self, action_id, action)
