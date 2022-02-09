@@ -10,3 +10,6 @@ This is the devlog of the new game I'm working on.
 - Started making tokens
 
 ## 09/02/2022
+
+- Added enemy. Make it move towards 0,0 (attack) and rotate to it.
+- Added bullet. Moves and rotates towards closest enemy. Delete at contact.

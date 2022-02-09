@@ -77,7 +77,7 @@ embedded_instances {
   id: "bg_creator"
   data: "components {\n"
   "  id: \"bg\"\n"
-  "  component: \"/bg/script.script\"\n"
+  "  component: \"/bg/bg.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
