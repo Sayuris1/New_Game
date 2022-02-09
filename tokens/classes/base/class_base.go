@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/tokens/classes/base/base_class.script"
+  component: "/tokens/classes/base/class_base.script"
   position {
     x: 0.0
     y: 0.0

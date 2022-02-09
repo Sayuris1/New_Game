@@ -3,8 +3,8 @@ key_trigger {
   action: "profile"
 }
 key_trigger {
-  input: KEY_1
-  action: "place"
+  input: KEY_SPACE
+  action: "shop"
 }
 mouse_trigger {
   input: MOUSE_BUTTON_1

@@ -14,3 +14,7 @@ This is the devlog of the new game I'm working on.
 - Added enemy. Make it move towards 0,0 (attack) and rotate to it. Can be killed.
 - Added bullet. Moves and rotates towards closest enemy. Delete at contact.
 - Can place tokens.
+
+## 10/02/2022
+
+- Added a basic shop UI.
