@@ -46,6 +46,14 @@ instances {
     z: 0.0
     w: 1.0
   }
+  component_properties {
+    id: "script"
+    properties {
+      id: "is_placed_start"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -94,6 +102,24 @@ embedded_instances {
   "  id: \"bg_factory\"\n"
   "  type: \"factory\"\n"
   "  data: \"prototype: \\\"/bg/bg/bg.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"token_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/tokens/classes/base/base_class.go\\\"\\n"
   "load_dynamically: false\\n"
   "\"\n"
   "  position {\n"
