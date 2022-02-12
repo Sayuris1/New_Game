@@ -17,8 +17,6 @@ function M.is_placable(x, y)
 
             -- If not on top of any
             for n = 1, #placed_tokens do
-                print(x, y)
-                print(placed_tokens[n].x, placed_tokens[n].y)
                 if placed_tokens[n].x == x and placed_tokens[n].y == y then
                     return false
                 end

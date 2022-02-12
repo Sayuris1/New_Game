@@ -1,0 +1,46 @@
+local status = require "modules.status"
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("wave_ended") then
+        status.wave_started = false
+
+        status.wave = status.wave + 1
+        status.enemies_remaining = status.wave * 2 + 1
+    end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("start_wave") and not status.wave_started then
+        status.wave_started = true
+
+        local distance = vmath.vector3(640, 360, 0)
+        for i = 1, status.enemies_remaining do
+            local angle = math.random() * math.pi
+            distance = vmath.rotate(vmath.quat_rotation_z(angle), distance)
+
+            factory.create("/wave_controller#imp_factory", distance)
+        end
+    end
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

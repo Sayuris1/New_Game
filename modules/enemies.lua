@@ -1,3 +1,5 @@
+local status = require "modules.status"
+
 local M = {}
 
 -- Only has vec3 as pos
@@ -13,6 +15,11 @@ end
 
 function M.remove(id)
     M.placed_enemies[id] = nil
+
+    status.enemies_remaining = status.enemies_remaining - 1
+    if status.enemies_remaining == 0 then
+        msg.post("/wave_controller#script", hash("wave_ended"))
+    end
 end
 
 function M.get_closest_enemy_id(self_pos)
