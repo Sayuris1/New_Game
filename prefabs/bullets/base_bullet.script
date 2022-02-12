@@ -2,7 +2,7 @@ local enemies = require "modules.enemies"
 
 function init(self)
 	go.property("enemy_url", msg.url())
-	go.property("speed", 300)
+	go.property("speed", 800)
 
     self.enemy_pos = enemies.placed_enemies[self.enemy_url.path].pos
 end

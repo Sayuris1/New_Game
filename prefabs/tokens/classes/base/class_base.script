@@ -4,8 +4,11 @@ local enemies = require "modules.enemies"
 local function fire()
     local enemy = enemies.get_closest_enemy_id(go.get_position())
     if enemy then
-        local enemy_url = msg.url(enemy)
-        factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
+        local enemy_pos = enemies.placed_enemies[enemy].pos
+        if math.abs(enemy_pos.x) < 640 and math.abs(enemy_pos.y) < 360 then
+            local enemy_url = msg.url(enemy)
+            factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
+        end
     end
 end
 

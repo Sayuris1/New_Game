@@ -22,4 +22,5 @@ This is the development log of the new game I'm working on.
 ## 12/02/2022
 
 - Bullet bugfix
+- Shop bugfix
 - Added wave controller.

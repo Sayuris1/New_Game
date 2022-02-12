@@ -7,6 +7,11 @@ function init(self)
     self.profile = false
     self.selected = false
     self.shop = false
+
+    self.shop_pos_hide = go.get_position()
+    self.shop_pos_show = go.get_position()
+    self.shop_pos_show.y = self.shop_pos_show.y + 100
+
     self.selected_token = msg.url()
 end
 
@@ -58,15 +63,14 @@ function on_input(self, action_id, action)
         end
 
     elseif action_id == hash("shop") and action.pressed then
-        local shop_pos = go.get_position("shop").y
-
+        local shop_pos
         if self.shop then
-            shop_pos = shop_pos - 100
+            shop_pos = self.shop_pos_hide
         else
-            shop_pos = shop_pos + 100
+            shop_pos = self.shop_pos_show
         end
 
-        go.animate("shop", "position.y", go.PLAYBACK_ONCE_FORWARD, shop_pos, go.EASING_LINEAR, 1)
+        go.animate("shop", "position", go.PLAYBACK_ONCE_FORWARD, shop_pos, go.EASING_LINEAR, 0.2)
 
         self.shop = not self.shop
 
