@@ -24,3 +24,4 @@ This is the development log of the new game I'm working on.
 - Bullet bugfix
 - Shop bugfix
 - Added wave controller.
+- Hit detection without collision.

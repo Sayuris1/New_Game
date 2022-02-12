@@ -19,6 +19,12 @@ function update(self, dt)
     if enemy then
         self.enemy_pos = enemy.pos
 
+        -- Check if hit
+        if vmath.length_sqr(go.get_position() - self.enemy_pos) < 100 then
+            msg.post(self.enemy_url, "hit")
+            go.delete()
+        end
+
     -- If enemy is dead before hit
     elseif vmath.length_sqr(go.get_position() - self.enemy_pos) < 100 then
         go.delete()
@@ -29,9 +35,6 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("trigger_response") then
-        go.delete()
-    end
 end
 
 function on_input(self, action_id, action)

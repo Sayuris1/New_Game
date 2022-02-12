@@ -20,12 +20,10 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-    if message_id == hash("trigger_response") then
-        if message.other_group == hash("bullet") then
-            self.hp = self.hp - 10
-            if self.hp <= 0 then
-                go.delete()
-            end
+    if message_id == hash("hit") then
+        self.hp = self.hp - 10
+        if self.hp <= 0 then
+            go.delete()
         end
     end
 end
