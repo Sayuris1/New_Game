@@ -1,4 +1,4 @@
-local tokens = require "tokens.tokens"
+local tokens = require "modules.tokens"
 local cursor = require "in.cursor"
 
 function init(self)

@@ -1,11 +1,11 @@
 # New_Game
 
-This is the devlog of the new game I'm working on.
+This is the development log of the new game I'm working on.
 
 ## 08/02/2022
 
 - Started the project !!
-- Open git. Add project. Add camera and set resulation.
+- Open git. Add project. Add camera and set resolution.
 - Added tile background that glows with mouse over.
 - Started making tokens
 
@@ -18,3 +18,7 @@ This is the devlog of the new game I'm working on.
 ## 10/02/2022
 
 - Added a basic shop UI.
+
+## 12/02/2022
+
+- Bullet bugfix

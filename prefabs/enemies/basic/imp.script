@@ -1,20 +1,21 @@
-local enemies = require "enemies.enemies"
+local enemies = require "modules.enemies"
 
 function init(self)
 	go.property("speed", 50)
 	go.property("hp", 50)
 
-    enemies.place(go.get_position())
+    self.id = go.get_id()
+
+    enemies.place(self.id, self.speed)
     enemies.rotate_to(vmath.vector3(0))
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	enemies.remove(self.id)
 end
 
 function update(self, dt)
+    enemies.update_pos(self.id)
     enemies.move_to(self.speed, vmath.vector3(0), dt)
 end
 

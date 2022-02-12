@@ -120,5 +120,6 @@
         ".internal",
         ".defold_api"
     ],
+    "Lua.completion.autoRequire": false,
     
 }

@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/enemies/basic/imp.script"
+  component: "/prefabs/enemies/basic/imp.script"
   position {
     x: 0.0
     y: 0.0

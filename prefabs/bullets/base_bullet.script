@@ -1,10 +1,10 @@
-local enemies = require "enemies.enemies"
+local enemies = require "modules.enemies"
 
 function init(self)
-	go.property("enemy_pos", vmath.vector3())
+	go.property("enemy_url", msg.url())
 	go.property("speed", 300)
 
-    enemies.rotate_to(self.enemy_pos)
+    self.enemy_pos = enemies.placed_enemies[self.enemy_url.path].pos
 end
 
 function final(self)
@@ -14,6 +14,17 @@ function final(self)
 end
 
 function update(self, dt)
+    local enemy = enemies.placed_enemies[self.enemy_url.path]
+
+    if enemy then
+        self.enemy_pos = enemy.pos
+
+    -- If enemy is dead before hit
+    elseif vmath.length_sqr(go.get_position() - self.enemy_pos) < 100 then
+        go.delete()
+    end
+
+    enemies.rotate_to(self.enemy_pos)
     enemies.move_to(self.speed, self.enemy_pos, dt)
 end
 

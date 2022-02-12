@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/tokens/classes/base/class_base.script"
+  component: "/prefabs/tokens/classes/base/class_base.script"
   position {
     x: 0.0
     y: 0.0
@@ -36,7 +36,7 @@ embedded_components {
 embedded_components {
   id: "bullet_factory"
   type: "factory"
-  data: "prototype: \"/bullets/base_bullet.go\"\n"
+  data: "prototype: \"/prefabs/bullets/base_bullet.go\"\n"
   "load_dynamically: false\n"
   ""
   position {

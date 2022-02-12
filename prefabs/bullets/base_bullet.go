@@ -1,6 +1,6 @@
 components {
   id: "script"
-  component: "/bullets/base_bullet.script"
+  component: "/prefabs/bullets/base_bullet.script"
   position {
     x: 0.0
     y: 0.0
