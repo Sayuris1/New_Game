@@ -25,6 +25,9 @@ function on_message(self, message_id, message, sender)
         if self.hp <= 0 then
             go.delete()
         end
+
+    elseif message_id == hash("trigger_response") then
+        go.delete()
     end
 end
 

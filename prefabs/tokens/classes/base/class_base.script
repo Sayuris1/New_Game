@@ -5,10 +5,8 @@ local function fire()
     local enemy = enemies.get_closest_enemy_id(go.get_position())
     if enemy then
         local enemy_pos = enemies.placed_enemies[enemy].pos
-        if math.abs(enemy_pos.x) < 640 and math.abs(enemy_pos.y) < 360 then
-            local enemy_url = msg.url(enemy)
-            factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
-        end
+        local enemy_url = msg.url(enemy)
+        factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
     end
 end
 
@@ -56,6 +54,9 @@ function on_message(self, message_id, message, sender)
 
         msg.post("/bg_creator#bg", "token_placed", {x = start_pos.x, y = start_pos.y,
             tint = vmath.vector4(1, 0, 0, 0.1)})
+
+    elseif message_id == hash("trigger_response") then
+        go.delete()
     end
 end
 

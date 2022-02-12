@@ -25,3 +25,4 @@ This is the development log of the new game I'm working on.
 - Shop bugfix
 - Added wave controller.
 - Hit detection without collision.
+- Enemies destroy tokens.
