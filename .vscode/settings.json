@@ -104,7 +104,8 @@
         "sprite",
         "json",
         "window",
-        "self"
+        "self",
+        "mouse_pos"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global",
@@ -121,5 +122,13 @@
         ".defold_api"
     ],
     "Lua.completion.autoRequire": false,
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
     
 }
