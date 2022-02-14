@@ -29,4 +29,5 @@ This is the development log of the new game I'm working on.
 
 ## 14/02/2022
 
-- Effects when enemy hits token
+- Effects when enemy hits token.
+- Reworked how token classes work.
