@@ -26,3 +26,7 @@ This is the development log of the new game I'm working on.
 - Added wave controller.
 - Hit detection without collision.
 - Enemies destroy tokens.
+
+## 14/02/2022
+
+- Effects when enemy hits token

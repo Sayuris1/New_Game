@@ -5,6 +5,7 @@ function init(self)
 	go.property("hp", 50)
 
     self.id = go.get_id()
+    self.move_to = vmath.vector3(0)
 
     enemies.place(self.id, self.speed)
     enemies.rotate_to(vmath.vector3(0))
@@ -16,7 +17,7 @@ end
 
 function update(self, dt)
     enemies.update_pos(self.id)
-    enemies.move_to(self.speed, vmath.vector3(0), dt)
+    enemies.move_to(self.speed, self.move_to, dt)
 end
 
 function on_message(self, message_id, message, sender)
@@ -26,8 +27,17 @@ function on_message(self, message_id, message, sender)
             go.delete()
         end
 
-    elseif message_id == hash("trigger_response") then
-        go.delete()
+    elseif message_id == hash("trigger_response") and message.enter then
+        -- Push back
+        local dir = vmath.normalize(go.get_position())
+        self.move_to = dir * 5000
+        self.speed = self.speed * 10
+
+        -- End push back
+        timer.delay(0.3, false, function () 
+            self.speed = self.speed / 10
+            self.move_to = vmath.vector3(0)
+        end)
     end
 end
 
