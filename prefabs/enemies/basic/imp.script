@@ -1,4 +1,5 @@
 local enemies = require "modules.enemies"
+local tokens = require "modules.tokens"
 
 function init(self)
 	go.property("speed", 50)

@@ -4,28 +4,22 @@ local enemies = require "modules.enemies"
 local function fire()
     local enemy = enemies.get_closest_enemy_id(go.get_position())
     if enemy then
-        local enemy_pos = enemies.placed_enemies[enemy].pos
         local enemy_url = msg.url(enemy)
-        --factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
+        factory.create("#bullet_factory", nil, nil, {enemy_url = enemy_url})
     end
 end
 
 function init(self)
-    go.property("attack_delay", 0.5)
-    go.property("hp", 20)
     go.property("is_placed_start", false)
+    self.counter = 0
+    self.token_table = {active_reload = math.huge}
     
     -- If token is going to init as placed
     if self.is_placed_start then
-        timer.delay(self.attack_delay, true, fire)
+        local tile = { x = 0, y = 0}
+        self.token_table = tokens.place(tile, "red_tower")
 
-        local start_pos = go.get_position()
-        start_pos.x = math.floor((start_pos.x + 25) / 50)
-        start_pos.y = math.floor((start_pos.y + 25) / 50)
-
-        tokens.place(start_pos, "red_tower")
-
-        msg.post("/bg_creator#bg", "token_placed", {x = start_pos.x, y = start_pos.y,
+        msg.post("/bg_creator#bg", "token_placed", {tile = tile,
             tint = vmath.vector4(1, 0, 0, 0.1)})
     end
 end
@@ -37,28 +31,24 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	self.counter = self.counter + dt
+    if self.token_table.active_reload < self.counter then
+        self.counter = 0
+        fire()
+    end
 end
 
 function on_message(self, message_id, message, sender)
     -- Init token after placing
 	if message_id == hash("placed") then
-        timer.delay(self.attack_delay, true, fire)
+        self.token_table = tokens.place(mouse_pos, "red_tower")
 
-        local start_pos = go.get_position()
-        start_pos.x = math.floor((start_pos.x + 25) / 50)
-        start_pos.y = math.floor((start_pos.y + 25) / 50)
-
-        tokens.place(start_pos, "red_tower")
-
-        msg.post("/bg_creator#bg", "token_placed", {x = start_pos.x, y = start_pos.y,
+        msg.post("/bg_creator#bg", "token_placed", {tile = mouse_pos,
             tint = vmath.vector4(1, 0, 0, 0.1)})
 
     elseif message_id == hash("trigger_response") then
-        self.hp = self.hp - 10
-        if self.hp < 0 then
+        self.token_table.current_hp = self.token_table.current_hp - 10
+        if self.token_table.current_hp < 0 then
             go.delete()
         end
     end

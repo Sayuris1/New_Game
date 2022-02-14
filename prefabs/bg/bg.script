@@ -42,10 +42,10 @@ end
 
 function on_message(self, message_id, message, sender)
     if message_id == hash("token_placed") then
-        go.set(url_table[message.x + 1][message.y], "tint", message.tint)
-        go.set(url_table[message.x - 1][message.y], "tint", message.tint)
-        go.set(url_table[message.x][message.y + 1], "tint", message.tint)
-        go.set(url_table[message.x][message.y - 1], "tint", message.tint)
+        go.set(url_table[message.tile.x + 1][message.tile.y], "tint", message.tint)
+        go.set(url_table[message.tile.x - 1][message.tile.y], "tint", message.tint)
+        go.set(url_table[message.tile.x][message.tile.y + 1], "tint", message.tint)
+        go.set(url_table[message.tile.x][message.tile.y - 1], "tint", message.tint)
     end
 end
 

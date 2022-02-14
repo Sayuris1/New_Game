@@ -1,3 +1,4 @@
+local utils = require "modules.utils"
 local token_types = require "modules.token_types"
 
 local M = {}
@@ -17,7 +18,6 @@ local placed_tokens = {}
 -- Using tile positions as index. Can be negative.
 -- So we are holding lowest and highest positions to easily iterate.
 local placed_borders = {high = {x = 0, y = 0}, low = {x = 0, y = 0}}
-
 
 function M.place(tile, token_type)
     -- Check if lowest or highest
@@ -49,7 +49,19 @@ function M.place(tile, token_type)
 
     -- Sends a referance to placed_tokens. Not a copy
     token_type.ability(tile_effects, placed_tokens, placed_borders, tile)
-    pprint(placed_tokens)
+
+    return placed_tokens[tile.x][tile.y]
+end
+
+-- Return true if a token is in tile
+-- Else return false
+function M.is_placed(tile)
+    local middle = placed_tokens[tile.x]
+    if middle and middle[tile.y] then
+        return true
+    end
+
+    return false
 end
 
 -- Return true if tile is a placeable tile

@@ -5,8 +5,7 @@ local M = {}
 function M.find_array(table, key)
     for i = 1, #table do
         if table[i] == key then
-
-            return i
+            return table[i]
         end
     end
 
