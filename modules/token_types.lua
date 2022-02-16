@@ -83,6 +83,16 @@ M.red_tower_leader = {
 
         local dmg = tokens[placed_tile.x][placed_tile.y].active_dmg
         tokens[placed_tile.x][placed_tile.y].active_dmg = dmg + own_tile_effect.effect_dmg
+    end,
+
+    notify = function(tile_effect, tokens, borders, placed_tile, own_tile)
+        if own_tile.x == placed_tile.x or own_tile.y == placed_tile.y then
+            local own_tile_effect = tile_effect[own_tile.x][own_tile.y]
+            own_tile_effect.effect_dmg = own_tile_effect.effect_dmg + 5
+
+            local dmg = tokens[own_tile.x][own_tile.y].active_dmg
+            tokens[own_tile.x][own_tile.y].active_dmg = dmg + own_tile_effect.effect_dmg
+        end
     end
 }
 

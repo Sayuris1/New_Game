@@ -31,3 +31,8 @@ This is the development log of the new game I'm working on.
 
 - Effects when enemy hits token.
 - Reworked how token classes work.
+
+## 16/02/2022
+
+- Added new token "red_tower_leader"
+- Added listenes property to token_types.

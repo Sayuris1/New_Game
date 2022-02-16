@@ -19,6 +19,21 @@ local placed_tokens = {}
 -- So we are holding lowest and highest positions to easily iterate.
 local placed_borders = {high = {x = 0, y = 0}, low = {x = 0, y = 0}}
 
+local function notify_listeners(tile, token_type)
+    for i = #placed_borders.low.x, #placed_borders.high.x do
+        local token_x = placed_tokens[i]
+        if token_x then
+            for n = #placed_borders.low.y, #placed_borders.high.y do
+                if token_x[n] and token_x[n].type.listens == token_type then
+                    local own_tile = {x = i, y = n}
+                    token_x[n].type.notify(tile_effects, placed_tokens, placed_borders,
+                        tile, own_tile)
+                end
+            end
+        end
+    end
+end
+
 function M.place(tile, token_type)
     -- Check if lowest or highest
     if tile.x > placed_borders.high.x then
@@ -49,6 +64,8 @@ function M.place(tile, token_type)
 
     -- Sends a referance to placed_tokens. Not a copy
     token_type.ability(tile_effects, placed_tokens, placed_borders, tile)
+    -- Notify listener tokens
+    notify_listeners(tile, token_type)
 
     return placed_tokens[tile.x][tile.y]
 end
