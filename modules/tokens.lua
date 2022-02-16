@@ -8,7 +8,7 @@ local tile_effects = {}
 for i = -150, 150 do
     tile_effects[i] = {}
     for n = -150, 150 do
-        tile_effects[i][n] = {effect_reload = 0}
+        tile_effects[i][n] = {effect_reload = 0, effect_dmg = 0}
     end
 end
 
